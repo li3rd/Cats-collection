@@ -1,0 +1,218 @@
+body {
+    margin: 0 0 50px;
+    display: flex;
+    justify-content: center;
+    font-family: sans-serif;
+    background-color: #cdcdcd;
+}
+.main_container {
+  width: 80%;
+  margin: 9em auto 0;
+  padding: 0 20px;
+}
+.container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+button {
+  cursor: pointer;
+}
+.card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    width: 460px;
+}
+.card_image {
+    height: 300px;
+    width: 50%;
+    background: url() center / cover no-repeat;
+    cursor: pointer;
+}
+.card_description {
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    background-color: whitesmoke;
+    padding-left: 10px;
+}
+.favorite {
+    color: firebrick;
+}
+.edit_components {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+#add_cat {
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    top: 3em;
+}
+.edit_components button {
+    width: 30px;
+    height: 30px;
+}
+.modal.open .modal_overlay,
+.modal.open .modal_window {
+  opacity: 1;
+  z-index: 99;
+}
+.modal.fading .modal_overlay,
+.modal.fading .modal_window {
+  opacity: 1;
+  z-index: 99;
+}
+.modal.open .modal_window {
+  transform: translateY(12vh);
+}
+.modal.open .modal_overlay {
+  background-color: rgba(0, 0, 0, .5);
+}
+.modal.fading .modal_window {
+  transform: translateY(-600px);
+}
+.modal.fading .modal_overlay {
+  background-color: rgba(0, 0, 0, 0);
+}
+.modal_overlay, .modal_window {
+  opacity: 0;
+  z-index: -1;
+}
+.modal_overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color .5s ease-out;
+}
+.modal_window {
+  max-width: 500px;
+  border-radius: 10px;
+  background-color: #cdcdcd;
+  margin: 0 auto;
+  position: relative;
+  color: black;
+  transform: translateY(-600px);
+  transition: transform .5s ease-out;
+}
+.modal_close {
+  position: absolute;
+  right: 5px;
+  top: 2px;
+  font-size: 25px;
+  font-weight: 500;
+  cursor: pointer;
+  z-index: 1;
+}
+.modal_form {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 50px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.modal_form input:not(.checkbox input){
+    margin-top: 5px;
+    appearance: none;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    height: 30px;
+    font-size: 16px;
+}
+.modal_form label {
+    margin-top: 7px;
+    font-size: 17px;
+}
+.modal_form button {
+    width: 50%;
+    align-self: center;
+    margin-top: 20px;
+    font-size: 15px;
+}
+.modal_view {
+  height: 450px;
+  width: 600px;
+  max-width: none;
+}
+.view {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  font-size: 20px;
+}
+.view_image {
+  width: 50%;
+  height: 100%;
+  background: url('https://www.ugorizont.ru/wp-content/uploads/sites/39/2019/08/D3aT1dQXoAApKi1.jpg') center / cover no-repeat;
+}
+.view_description {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+}
+.rating-result {
+	width: 270px;
+	margin: 5px;
+}
+.rating-result span {
+	padding: 0;
+	font-size: 23px;
+	margin: 0 1px;
+	line-height: 1;
+	color: lightgrey;
+	text-shadow: 1px 1px #bbb;
+}
+.rating-result > span:before {
+	content: '★';
+}
+.rating-result > span.active {
+	color: gold;
+	text-shadow: 1px 1px #c60;
+}
+.view_description_lower {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 10px;
+}
+.view_description_upper {
+  margin: 5px 10px;
+}
+@media (max-width: 720px) {
+  .modal_view {
+    height: 300px;
+    width: 275px;
+  }
+  .view {
+    width: 100%;
+    height: 100%;
+    display: block;
+    font-size: 15px;
+  }
+  .view_image {
+    width: 100%;
+    height: 100%;
+  }
+  .view_description {
+    width: 100%
+  }
+  .modal_form {
+    padding: 20px 25px;
+  }
+  .modal_overlay {
+    padding: 0 15px;
+  }
+}
