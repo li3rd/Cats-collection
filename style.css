@@ -42,6 +42,7 @@ button {
 }
 .favorite {
     color: firebrick;
+    font-size: 20px;
 }
 .edit_components {
     position: absolute;
@@ -176,6 +177,9 @@ input::-webkit-inner-spin-button {
 	color: lightgrey;
 	text-shadow: 1px 1px #bbb;
 }
+/* .rating-result span:hover {
+
+} */
 .rating-result > span:before {
 	content: '★';
 }
@@ -194,13 +198,13 @@ input::-webkit-inner-spin-button {
 @media (max-width: 720px) {
   .modal_view {
     height: 300px;
-    width: 275px;
+    width: 290px;
   }
   .view {
     width: 100%;
     height: 100%;
     display: block;
-    font-size: 15px;
+    font-size: 16px;
   }
   .view_image {
     width: 100%;
@@ -214,5 +218,8 @@ input::-webkit-inner-spin-button {
   }
   .modal_overlay {
     padding: 0 15px;
+  }
+  .modal_view .modal_close {
+    color: white;
   }
 }

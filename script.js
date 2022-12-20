@@ -80,20 +80,20 @@ function createModalForView(cat) {                                              
                     <p>Описание: ${cat.description}</p>
                     <p>Рейтинг: ${cat.rate}</p>
                     <div class="rating-result">
-                        <span></span>	
-                        <span></span>    
-                        <span></span>  
-                        <span></span>    
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                        <span data-rating="1"></span>	
+                        <span data-rating="2"></span>    
+                        <span data-rating="3"></span>  
+                        <span data-rating="4"></span>    
+                        <span data-rating="5"></span>
+                        <span data-rating="6"></span>
+                        <span data-rating="7"></span>
+                        <span data-rating="8"></span>
+                        <span data-rating="9"></span>
+                        <span data-rating="10"></span>
                     </div>
                 </div>
                 <div class="view_description_lower">
-                    <span title="Id">${cat.id}</span>
+                    <span title="Id"></span>
                     <i><i class="favorite fa-regular fa-heart ${heart}"></i></i>
                 </div>
             </div>
@@ -179,6 +179,12 @@ async (ev) => {
             $stars[i].classList.add('active')
         }
         setTimeout(() => open($viewModal), 10);
+        $viewModal.addEventListener('click', (e) => {
+            if (e.target.closest('[data-rating]')) {
+                let catRating = e.target.closest('[data-rating]').dataset.rating
+                cat.rate = +catRating;
+            }
+        })
         document.addEventListener('click', function clack(event) {
             const layout = event.target.classList.contains('modal_overlay');
             const times = event.target.classList.contains('modal_close');
