@@ -229,4 +229,7 @@ input::-webkit-inner-spin-button {
   .rating-result span {
     font-size: 21px;
   }
+  .view_description_upper {
+    margin-right: 3px;
+  }
 }
