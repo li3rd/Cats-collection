@@ -78,7 +78,7 @@ function createModalForView(cat) {                                              
                     <p>Имя кота: <strong>${cat.name}</strong> </p>
                     <p>Возраст: ${cat.age}</p>
                     <p>Описание: ${cat.description}</p>
-                    <p>Рейтинг: ${cat.rate}</p>
+                    <p id="view-rating">Рейтинг: ${cat.rate}</p>
                     <div class="rating-result">
                         <span data-rating="1"></span>	
                         <span data-rating="2"></span>    
@@ -111,6 +111,40 @@ function close(elem) {
     setTimeout(() => {
         elem.classList.remove('fading')
     }, 400)
+}
+// функция для изменения рейтинга и лайка в окне просмотра (на карточке и на бекэнде)
+function updateCat(event, cat) {
+    let index = event.target.closest('[data-index]').dataset.index
+    let $catCard = event.target.closest('.card');
+    let catId = $catCard.dataset.id;
+    fetch(`https://cats.petiteweb.dev/api/single/li3rd/update/${catId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(cat)
+            })
+            .then(res => {
+                if (res.status === 200) {
+                    $catCard.remove()
+                    if (document.querySelector(`[data-index='${index - 1}']`) === null) container.insertAdjacentHTML('afterbegin', createCard(cat, index))
+                    else document.querySelector(`[data-index='${index - 1}']`).insertAdjacentHTML('afterend', createCard(cat, index))
+                }
+                else alert(`Не вышло`)
+            }).catch(err => alert(`Ошибка ${err}`))
+}
+function likeChange() {
+    let $heart = document.querySelector('.view_description_lower .favorite')
+    $heart.classList.toggle('fa-solid')
+}
+function ratingChange(n) {
+    let $stars = document.querySelectorAll('.rating-result > span')
+    let $rating = document.querySelector('#view-rating')
+    $stars.forEach(el => el.classList.remove('active'))
+    for(let i = 0; i < n; i++) {
+        $stars[i].classList.toggle('active')
+    }
+    $rating.innerText = `Рейтинг: ${n}`
 }
 container.addEventListener('click',                                                            //общий обработчик                       
 async (ev) => {
@@ -174,22 +208,25 @@ async (ev) => {
         let cat = await response.json();
         createModalForView(cat);
         let $viewModal = document.querySelector('[data-view]');
-        let $stars = document.querySelectorAll('.rating-result > span')
-        for(let i = 0; i < cat.rate; i++) {
-            $stars[i].classList.add('active')
-        }
+        ratingChange(cat.rate)
         setTimeout(() => open($viewModal), 10);
         $viewModal.addEventListener('click', (e) => {
             if (e.target.closest('[data-rating]')) {
                 let catRating = e.target.closest('[data-rating]').dataset.rating
                 cat.rate = +catRating;
+                ratingChange(cat.rate)
+            }
+            if (e.target.closest('.favorite')) {
+                likeChange()
+                cat.favorite = !cat.favorite
             }
         })
         document.addEventListener('click', function clack(event) {
             const layout = event.target.classList.contains('modal_overlay');
             const times = event.target.classList.contains('modal_close');
             if (layout || times) {
-                close($viewModal);
+                updateCat(ev, cat)
+                close($viewModal)
                 setTimeout(() => $viewModal.remove(), 410);
                 document.removeEventListener('click', clack);
             }
