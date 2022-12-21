@@ -165,7 +165,7 @@ input::-webkit-inner-spin-button {
   justify-content: space-between;
   background-color: white;
 }
-.view_description .favorite {
+.favorite {
   cursor: pointer;
 }
 .rating-result {

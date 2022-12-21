@@ -157,7 +157,14 @@ async (ev) => {
             if (res.status === 200) return $catCard.remove();
             alert(`Не получилось удалить кота с Id ${catId}`)
         })
-    } 
+    }
+    if (ev.target.closest('.card_description .favorite')) {
+        let response = await fetch(`https://cats.petiteweb.dev/api/single/li3rd/show/${catId}`) 
+        let cat = await response.json();
+        ev.target.closest('.card_description .favorite').classList.toggle('fa-solid')
+        cat.favorite = !cat.favorite
+        updateCat(ev, cat)
+    }
     if (ev.target.closest('#edit_cat')) {                                                       //редактирование карточки
         let response = await fetch(`https://cats.petiteweb.dev/api/single/li3rd/show/${catId}`) 
         let cat = await response.json();
@@ -216,7 +223,7 @@ async (ev) => {
                 cat.rate = +catRating;
                 ratingChange(cat.rate)
             }
-            if (e.target.closest('.favorite')) {
+            if (e.target.closest('.view_description_lower .favorite')) {
                 likeChange()
                 cat.favorite = !cat.favorite
             }
