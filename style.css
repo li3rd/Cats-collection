@@ -169,8 +169,8 @@ input::-webkit-inner-spin-button {
   cursor: pointer;
 }
 .rating-result {
-	width: 270px;
-	margin: 5px;
+	width: 100%;
+  padding: 0
 }
 .rating-result span {
 	padding: 0;
@@ -198,6 +198,7 @@ input::-webkit-inner-spin-button {
 }
 .view_description_upper {
   margin: 5px 10px;
+  margin-right: 3px;
 }
 @media (max-width: 720px) {
   .modal_view {
@@ -228,9 +229,6 @@ input::-webkit-inner-spin-button {
   }
   .rating-result span {
     font-size: 21px;
-  }
-  .rating-result {
-    margin: 0;
   }
   .view_description_upper {
     margin-right: 3px;
